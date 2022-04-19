@@ -1,22 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './Navbar';
 
 function App() {
-  return (
+  return (    
     <div className="App">
+      
+      <Navbar/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          E-commerce
+        <p>E-commerce
+          <h1 className="text-4xl font-bold underline">INFO-TECH</h1>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Info-Tech
-        </a>
+      
       </header>
     </div>
   );
