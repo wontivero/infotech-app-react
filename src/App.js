@@ -1,19 +1,17 @@
-import logo from './logo.svg';
+
 import './App.css';
-import Navbar from './Navbar';
+import Navbar from './components/Navbar';
+import ItemListContainer from './components/ItemListContainer';
+
 
 function App() {
-  return (    
+  return (
     <div className="App">
-      
-      <Navbar/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>E-commerce
-          <h1 className="text-4xl font-bold underline">INFO-TECH</h1>
-        </p>
-      
-      </header>
+
+      <Navbar />
+
+      <ItemListContainer />
+
     </div>
   );
 }
