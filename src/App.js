@@ -12,7 +12,7 @@ function App() {
       <Navbar />
 
       <ItemListContainer />
-      <ItemCount/>
+      {/* <ItemCount/> */}
     </div>
   );
 }

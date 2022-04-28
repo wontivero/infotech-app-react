@@ -16,14 +16,21 @@ const ItemCount = () => {
 
     return (
         <>
-            <div className="w-48 rounded-lg border-solid border-2 border-sky-500 mx-1 mt-4 ">
+            <div className="w-36 rounded-lg">
 
+                {/* 
+                <div className="w-36 rounded-lg border-solid border-2 border-sky-300 mx-1 ">
                 <div className="text-lg">Nombre del Producto</div>
                 <button className="btn btn-ghost normal-case mx-1.5" onClick={lessHandler}> - </button>
                 <strong className="text-xl">{count}</strong>
                 <button className="btn btn-ghost normal-case mx-1.5" onClick={addHandler}>+</button>
 
-                <button class="btn btn-outline btn-success m-2">Agregar</button>
+                <button class="btn btn-outline btn-success m-2">Agregar</button> 
+                </div>*/}
+
+                <button className="btn btn-ghost normal-case mx-0.5" onClick={lessHandler}> - </button>
+                <strong className="text-lg">{count}</strong>
+                <button className="btn btn-ghost normal-case mx-0.5" onClick={addHandler}>+</button>
             </div>
         </>
     )
