@@ -6,11 +6,6 @@ const ItemDetailContainer = () => {
 
     const [item, setItem] = useState([])
 
-    useEffect(() => {
-        getItem()
-    }, [])
-
-
     const getItem = () => {
         const getItemsPromise = new Promise((resolve, reject) => {
 
@@ -25,6 +20,11 @@ const ItemDetailContainer = () => {
         })
     }
 
+    useEffect(() => {
+        getItem()
+    }, [])
+
+    
     return (
         <div>
             <h2 className="font-bold text-xl text-left m-5">Producto Destacado</h2>

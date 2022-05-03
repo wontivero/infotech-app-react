@@ -9,10 +9,6 @@ const ItemList = () => {
     const [items, setItems] = useState([])
 
 
-    //Cuando Montamos el componente
-    useEffect(() => {
-        getItems()
-    }, [])
 
 
     //Promesa q se resuelve 2 seg despues resuelve y carga  ItemsData con setItems 
@@ -30,6 +26,13 @@ const ItemList = () => {
             setItems(data)
         })
     }
+
+    //Cuando Montamos el componente
+    useEffect(() => {
+        getItems()
+    }, [])
+
+
 
     return (
         <div>
