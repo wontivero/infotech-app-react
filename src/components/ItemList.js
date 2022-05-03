@@ -34,7 +34,7 @@ const ItemList = () => {
     return (
         <div>
             {/* envio cada item al ItemCard.js */}
-            {items.map(a => <ItemCard key={a.id} item={a} />)}
+            {items.map(articulo => <ItemCard key={articulo.id} item={articulo} />)}
         </div>
     )
 }
