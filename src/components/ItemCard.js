@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom"
 import ItemCount from "./ItemCount"
 
 const ItemCard = (props) => {
 
-    const { name, categoria, precio, stock, img } = props.item
+    const { id, name, categoria, precio, stock, img } = props.item
     return (
         <div>
             {/* <div>{name}</div>
@@ -19,7 +20,7 @@ const ItemCard = (props) => {
                     <h2 className="text-xl">${precio}</h2>
                     <div><ItemCount /></div>
                     <div class="card-actions justify-center">
-                        <button class="btn btn-outline btn-accent">Comprar</button>
+                        <Link to={`/item/${id}`} class="btn btn-outline btn-accent">Más Info</Link>
                     </div>
                 </div>
             </div>
