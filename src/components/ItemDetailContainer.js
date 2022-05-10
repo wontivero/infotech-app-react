@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
+// import { Link, useParams } from "react-router-dom"
 import { itemsData } from "../data/itemData"
-import ItemCard from "./ItemCard"
+// import ItemCard from "./ItemCard"
+import ItemDetail from "./ItemDetail"
 
 
 const ItemDetailContainer = () => {
@@ -30,7 +32,7 @@ const ItemDetailContainer = () => {
     return (
         <div>
             <h2 className="font-bold text-xl text-left m-5">Detalle del Producto:</h2>
-            {item.map(articulo => <ItemCard key={articulo.id} item={articulo} />)}
+            {item.map(articulo => <ItemDetail key={articulo.id} item={articulo} />)}
             
         </div>
     )
