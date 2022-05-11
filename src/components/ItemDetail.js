@@ -23,7 +23,7 @@ const ItemDetail = (props) => {
                     <h2 className="text-xl">${precio}</h2>
                     
                     <div class="card-actions justify-center">
-                        {terminar?(
+                        {terminar ? (
                             <Link to={``} class="btn btn-outline btn-accent">Finalizar Compra</Link>   
                         ):(
                             <div><ItemCount stock={stock} onAdd={onAdd}/></div>
