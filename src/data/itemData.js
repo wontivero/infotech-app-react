@@ -1,4 +1,4 @@
-export const itemsData = [{
+const products = [{
     id: '1',
     name: 'Notebook ASUS XJ2588Pro',
     categoria: 'Notebooks',
@@ -41,3 +41,11 @@ export const itemsData = [{
     stock: '1',
     img: "https://www.cetrogar.com.ar/media/catalog/product/c/m/cm3234-1.jpg?width=500&height=500&canvas=500,500&quality=80&bg-color=255,255,255&fit=bounds"
 }]
+
+const task = new Promise((resp) => {
+	resp(products)
+}, 2000)
+
+export const getItem = () => {
+	return task
+}

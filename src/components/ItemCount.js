@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { useAppContext } from "./context/AppContext";
+import { useCartContext } from "./context/CartContext";
 
-const ItemCount = ({ stock, onAdd }) => {
+const ItemCount = ({ stock, onAdd, id }) => {
     //console.log("Contador");
     const [count, setCount] = useState(0)
+
+    const { addToCart } = useCartContext()
+    const { products } = useAppContext()
 
     const addHandler = () => {
         //console.log("Agrego 1");
@@ -16,7 +21,15 @@ const ItemCount = ({ stock, onAdd }) => {
             setCount(count - 1)
         }
     }
-
+    const handleClick = (id, cantidad) => {
+        const findProduct = products.find((prod)=>prod.id === id)
+        if (!findProduct) {
+            alert("error en la Base de datos")
+            return
+        }
+        addToCart(findProduct,cantidad)
+        onAdd(count)
+    }
 
     return (
         <>
@@ -27,7 +40,8 @@ const ItemCount = ({ stock, onAdd }) => {
                     <button className="btn btn-ghost normal-case mx-0.5" onClick={addHandler}>+</button>
                 </div>
                 <div>
-                    <button className="btn btn-outline btn-accent" onClick={()=> onAdd(count)}>
+                    <button className="btn btn-outline btn-accent"
+                        onClick={() => handleClick(id, count)}>
                         Agregar
                     </button>
                 </div>

@@ -24,9 +24,9 @@ const ItemDetail = (props) => {
                     
                     <div class="card-actions justify-center">
                         {terminar ? (
-                            <Link to={``} class="btn btn-outline btn-accent">Finalizar Compra</Link>   
+                            <Link to={'/cart'} class="btn btn-outline btn-accent">Finalizar Compra</Link>   
                         ):(
-                            <div><ItemCount stock={stock} onAdd={onAdd}/></div>
+                            <div><ItemCount stock={stock} onAdd={onAdd} id={id}/></div>
                         )}
                         
                     </div>
