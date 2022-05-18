@@ -27,10 +27,14 @@ const ItemList = () => {
     }, [])
 
     return (
-        <div>
-            {/* envio cada item al ItemCard.js */}
-            {items.map(articulo => <ItemCard key={articulo.id} item={articulo} />)}
-        </div>
+        <>
+            
+                <div className="my-2">
+                    {/* envio cada item al ItemCard.js */}
+                    {items.map(articulo => <ItemCard key={articulo.id} item={articulo} />)}
+                </div>
+            
+        </>
     )
 }
 export default ItemList

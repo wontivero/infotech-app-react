@@ -26,22 +26,24 @@ const ItemListContainer = () => {
 
     useEffect(() => {
 
-        
-            if (categoriaID === undefined) {
-                getItem().then((data)=>setItems(data))
-            }
-            else {
-                getItem().then((data)=>setItems(data.filter(producto => producto.categoria === categoriaID)))
-            }
+
+        if (categoriaID === undefined) {
+            getItem().then((data) => setItems(data))
+        }
+        else {
+            getItem().then((data) => setItems(data.filter(producto => producto.categoria === categoriaID)))
+        }
 
 
-            //console.log(items);
-        }, [categoriaID])
+        //console.log(items);
+    }, [categoriaID])
 
-        return (
-            <div>
+    return (
+        <div className="container mx-auto">
+            <div className="grid  grid-cols-1 md:container md:mx-auto md:grid-cols-2 lg:grid-cols-3 gap-5 my-2 ">
                 {items.map(articulo => <ItemCard key={articulo.id} item={articulo} />)}
             </div>
-        )
-    }
+        </div>
+    )
+}
 export default ItemListContainer

@@ -25,7 +25,8 @@ const ItemDetailContainer = () => {
 
 
     useEffect(() => {
-        getItem().then((dato)=> setItem(dato))
+        getItem().then((dato)=>setItem(dato.filter(i=>i.id === itemID)))
+        
     }, [itemID])
 
     
@@ -33,6 +34,7 @@ const ItemDetailContainer = () => {
         <div>
             <h2 className="font-bold text-xl text-left m-5">Detalle del Producto:</h2>
             {item.map(articulo => <ItemDetail key={articulo.id} item={articulo} />)}
+            
             
         </div>
     )

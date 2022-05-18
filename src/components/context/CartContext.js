@@ -42,14 +42,21 @@ const CartContextProvider = ({ children }) => {
     //limpiar todo en el cart
     const deleteCart = () => setCart([])
 
+    //Total de Productos:
+    const totalCant = () => {
+        let total = 0
+        cart.forEach(item => total += item.quantity ) 
+        return total;
+    }
 
-    console.log(cart);
+    //console.log(cart);
     return <CartContext.Provider value={{
         cart,
         addToCart,
         deleteFromCart,
         deleteCart,
-        setCart
+        setCart,
+        totalCant
     }}> {children} </CartContext.Provider>
 }
 export default CartContextProvider
