@@ -1,3 +1,4 @@
+import { collection, getDocs, getFirestore } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getItem } from "../data/itemData"
@@ -8,30 +9,52 @@ const ItemListContainer = () => {
     const { categoriaID } = useParams()
     const [items, setItems] = useState([])
 
-    // const getItems = () => {
-    //     const getItemsPromise = new Promise((resolve, reject) => {
-    //         setTimeout(() => {
-    //             resolve(itemsData)
-    //         }, 2000);
+
+    // useEffect(() => {
+
+    //     const db = getFirestore()
+    //     const q = collection(db, "products")
+
+    //     getDocs(q).then(snapshot => {
+    //         setItems(snapshot.docs.map((doc) => ({
+    //             id: doc.id, ...doc.data()
+    //         })))
     //     })
-    //     getItemsPromise.then(data => {
-    //         if (categoriaID === undefined) {
-    //             setItems(data)
-    //         }
-    //         else {
-    //             setItems(data.filter(producto => producto.categoria === categoriaID ))
-    //         }
-    //     })
-    // }
+
+    // }, [])
+
+
+    //Optengo Los PRODUCTOS y los transformo en un array co 
+    const getProducts = async () => {
+        const db = getFirestore()
+        const q = collection(db, "products")
+
+        const data = (await getDocs(q)).docs.map((doc) => ({
+            id: doc.id, ...doc.data()
+        }))
+
+        return data
+    }
+
 
     useEffect(() => {
 
+        // const productos = getDocs(q).then(snapshot => {
+        //     setItems(snapshot.docs.map((doc) => ({
+        //         id: doc.id, ...doc.data()
+        //     })))
+        // })
 
         if (categoriaID === undefined) {
-            getItem().then((data) => setItems(data))
+
+            getProducts().then(productos => {
+                setItems(productos)
+            })
         }
         else {
-            getItem().then((data) => setItems(data.filter(producto => producto.categoria === categoriaID)))
+            getProducts().then(productos => {
+                setItems(productos.filter(producto => producto.category === categoriaID))
+            })        
         }
 
 
