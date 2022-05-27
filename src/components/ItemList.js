@@ -26,10 +26,6 @@ const ItemList = () => {
         getItems()
     }, [])
 
-
-
-    
-
     return (
         <>
             
