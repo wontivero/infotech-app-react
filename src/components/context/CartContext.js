@@ -49,6 +49,11 @@ const CartContextProvider = ({ children }) => {
         return total;
     }
 
+    //Guardar Carrito en BD
+    const guardarCompra = (cliente, productos) => {
+        console.log(cliente, productos);
+    }
+
     //console.log(cart);
     return <CartContext.Provider value={{
         cart,
@@ -56,7 +61,8 @@ const CartContextProvider = ({ children }) => {
         deleteFromCart,
         deleteCart,
         setCart,
-        totalCant
+        totalCant,
+        guardarCompra
     }}> {children} </CartContext.Provider>
 }
 export default CartContextProvider

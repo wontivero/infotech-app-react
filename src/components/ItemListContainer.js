@@ -1,7 +1,7 @@
 import { collection, getDocs, getFirestore } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getItem } from "../data/itemData"
+import { getProducts } from "../data/itemData"
 import ItemCard from "./ItemCard"
 
 const ItemListContainer = () => {
@@ -25,16 +25,16 @@ const ItemListContainer = () => {
 
 
     //Optengo Los PRODUCTOS y los transformo en un array co 
-    const getProducts = async () => {
-        const db = getFirestore()
-        const q = collection(db, "products")
+    // const getProducts = async () => {
+    //     const db = getFirestore()
+    //     const q = collection(db, "products")
 
-        const data = (await getDocs(q)).docs.map((doc) => ({
-            id: doc.id, ...doc.data()
-        }))
+    //     const data = (await getDocs(q)).docs.map((doc) => ({
+    //         id: doc.id, ...doc.data()
+    //     }))
 
-        return data
-    }
+    //     return data
+    // }
 
 
     useEffect(() => {

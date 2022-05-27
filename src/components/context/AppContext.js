@@ -4,18 +4,30 @@ import {
   useEffect,
   useState
 } from "react"
-import { getItem } from "../../data/itemData"
+import { getItem, getProducts } from "../../data/itemData"
 
 
 const AppContext = createContext()
 
 export const useAppContext = () => useContext(AppContext)
 
+// const AppContextProvider = ({children}) => {
+
+//   const [products, setProducts] = useState([])
+//   useEffect(() => {
+//     getItem().then((resp) => setProducts(resp))
+//   })
+
+//   return (<AppContext.Provider value={{ products }}>{children}</AppContext.Provider>)
+
+// }
+
+
 const AppContextProvider = ({children}) => {
 
   const [products, setProducts] = useState([])
   useEffect(() => {
-    getItem().then((resp) => setProducts(resp))
+    getProducts().then((resp) => setProducts(resp))
   })
 
   return (<AppContext.Provider value={{ products }}>{children}</AppContext.Provider>)

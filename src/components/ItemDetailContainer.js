@@ -1,7 +1,7 @@
 import { doc, getDoc, getFirestore } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getItem } from "../data/itemData"
+import { getItem, getProduct } from "../data/itemData"
 import ItemDetail from "./ItemDetail"
 
 
@@ -25,19 +25,17 @@ const ItemDetailContainer = () => {
     // }
 
 
-        //Optengo Los PRODUCTOS y los transformo en un array
-        const getProduct = async (ID) => {
-            const db = getFirestore()
-            const docRef = doc(db, "products", ID)
-    
-            const producto = (await getDoc(docRef))
+    //Optengo Los PRODUCTOS y los transformo en un array
+    // const getProduct = async (ID) => {
+    //     const db = getFirestore()
+    //     const docRef = doc(db, "products", ID)
 
-            const data = ({ id: producto.id, ...producto.data() })
-            //console.log("DATA" , data);
-            
-            return data
+    //     const producto = (await getDoc(docRef))
 
-        }
+    //     const data = ({ id: producto.id, ...producto.data() })
+    //     //console.log("DATA" , data);
+    //     return data
+    // }
 
     useEffect(() => {
         // //obtengo un producto FIREBASE

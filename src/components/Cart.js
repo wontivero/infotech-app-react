@@ -4,7 +4,7 @@ import { useCartContext } from "./context/CartContext";
 
 //import DeleteButton from "./DeleteButton";
 const Cart = () => {
-    const { cart, deleteFromCart,deleteCart } = useCartContext();
+    const { cart, deleteFromCart, deleteCart, guardarCompra} = useCartContext();
 
     const cartPrint = cart.map((item) => {
         function deleteItem(item) {
@@ -37,7 +37,7 @@ const Cart = () => {
                             </td>
                             <td>{item.quantity}</td>
                             <td>${totalPrice}</td>
-                            
+
                             <td><Link to={'/cart'}>
                                 <button className="btn btn-outline btn-accent"
                                     onClick={() => deleteItem(item)}>
@@ -68,6 +68,17 @@ const Cart = () => {
                 </div>
                 <div className="">
                     <button
+                        onClick={guardarCompra}
+                        className="
+             mb-2 w-full inline-block px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-normal
+             uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg
+             focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out
+             "
+                    >
+                        Comprar
+                    </button>
+
+                    <button
                         onClick={deleteCart}
                         className="
              mb-2 w-full inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-normal
@@ -78,7 +89,7 @@ const Cart = () => {
                         Borrar Todo
                     </button>
                 </div>
-            </div>
+            </div >
         )
     }
 }
