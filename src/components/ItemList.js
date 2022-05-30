@@ -7,6 +7,7 @@ const ItemList = () => {
 
     //console.log(itemsData);
     const [items, setItems] = useState([])
+    const { products } = useAppContext()
 
     //Promesa q se resuelve 2 seg despues resuelve y carga  ItemsData con setItems 
     const getItems = () => {
@@ -23,7 +24,8 @@ const ItemList = () => {
 
     //Cuando Montamos el componente
     useEffect(() => {
-        getItems()
+        // getItems()
+        setItems(products)
     }, [])
 
     return (

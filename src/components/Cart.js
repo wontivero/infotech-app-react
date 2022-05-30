@@ -1,17 +1,49 @@
 
 import { Link } from "react-router-dom";
 import { useCartContext } from "./context/CartContext";
+import { generateOrder } from "./firebase/firebaseService";
+import Swal from "sweetalert2"
 
 //import DeleteButton from "./DeleteButton";
 const Cart = () => {
-    const { cart, deleteFromCart, deleteCart, guardarCompra} = useCartContext();
+    const { cart, deleteFromCart, deleteCart } = useCartContext()
+    const buyer = { nombre: "Jose", phone: "351123858", email: "jose@gmail.com" }
+
+    const handlerSave = ()=>{
+
+        let total = 0
+        cart.forEach(item => total += item.quantity * item.precio)
+        console.log(total);
+        
+        const order = {
+            buyer,
+            item: cart,
+            total: total    
+        }
+
+        generateOrder(order).then((result)=>{
+            new Swal({
+                title: "Tu orden fue enviada con éxito!",
+                text: `Tu n° de orden es: ${result.id}`,
+                icon: "success",
+                button: "Ok",
+            })
+            .then(() => deleteCart())
+        })
+
+
+    }
+    
+
 
     const cartPrint = cart.map((item) => {
         function deleteItem(item) {
             deleteFromCart(item);
         }
 
+
         const totalPrice = item.quantity * item.precio;
+
 
         return (
             <div class="overflow-x-auto">
@@ -60,7 +92,8 @@ const Cart = () => {
                 </Link>
             </div>
         );
-    } else {
+    }
+    if (cart.length !== 0) {
         return (
             <div data-theme="emerald">
                 <div>
@@ -68,7 +101,7 @@ const Cart = () => {
                 </div>
                 <div className="">
                     <button
-                        onClick={guardarCompra}
+                        onClick={handlerSave}
                         className="
              mb-2 w-full inline-block px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-normal
              uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg

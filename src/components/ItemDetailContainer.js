@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getItem } from "../data/itemData"
+import { useAppContext } from "./context/AppContext"
 import ItemDetail from "./ItemDetail"
 
 
@@ -8,26 +9,13 @@ import ItemDetail from "./ItemDetail"
 const ItemDetailContainer = () => {
     //Recuperamo el ID q nos manda por URL
     const {itemID} =useParams()
-
+    const { products } = useAppContext()
     const [item, setItem] = useState([])
 
-    // const getItem = () => {
-    //     const getItemsPromise = new Promise((resolve, reject) => {
-    //         setTimeout(() => {
-    //             resolve(itemsData.filter(i => i.id === itemID))
-    //         }, 1000);
-    //     })
-    //     getItemsPromise.then(data => {
-    //         //console.log(data);
-    //         setItem(data)
-    //     })
-    // }
-
-
     useEffect(() => {
-        getItem().then((dato)=>setItem(dato.filter(i=>i.id === itemID)))
+        setItem(products.filter(i=>i.id === itemID))
         
-    }, [itemID])
+    }, [itemID, products])
 
     
     return (

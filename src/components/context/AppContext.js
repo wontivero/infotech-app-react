@@ -1,36 +1,38 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState
-} from "react"
-import { getItem, getProducts } from "../../data/itemData"
-
+import React, { createContext, useContext, useState, useEffect } from "react"
+import { getItems } from "../firebase/firebaseService"
 
 const AppContext = createContext()
 
 export const useAppContext = () => useContext(AppContext)
 
-// const AppContextProvider = ({children}) => {
+const AppContextProvider = ({ children }) => {
+	const [products, setProducts] = useState([])
 
-//   const [products, setProducts] = useState([])
-//   useEffect(() => {
-//     getItem().then((resp) => setProducts(resp))
-//   })
+	useEffect(() => {
+		let firestoreProducts = []
+		getItems()
+			.then((res) =>
+				res.docs.forEach((doc) => {
+					firestoreProducts.push({
+						...doc.data(),
+						id: doc.id,
+					})
+				})
+			)
+			.then(() => setProducts(firestoreProducts))
+	}, [])
 
-//   return (<AppContext.Provider value={{ products }}>{children}</AppContext.Provider>)
+	//console.log(products)
 
-// }
-
-
-const AppContextProvider = ({children}) => {
-
-  const [products, setProducts] = useState([])
-  useEffect(() => {
-    getProducts().then((resp) => setProducts(resp))
-  })
-
-  return (<AppContext.Provider value={{ products }}>{children}</AppContext.Provider>)
-
+	return (
+		<AppContext.Provider
+			value={{
+				products,
+			}}
+		>
+			{children}
+		</AppContext.Provider>
+	)
 }
+
 export default AppContextProvider

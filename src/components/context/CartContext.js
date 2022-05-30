@@ -45,13 +45,24 @@ const CartContextProvider = ({ children }) => {
     //Total de Productos:
     const totalCant = () => {
         let total = 0
-        cart.forEach(item => total += item.quantity ) 
+        cart.forEach(item => total += item.quantity)
+        return total;
+    }
+    //Total de Productos:
+    const totalGeneral = () => {
+        let total = 0
+        cart.forEach(item => total += item.quantity * item.precio)
         return total;
     }
 
     //Guardar Carrito en BD
-    const guardarCompra = (cliente, productos) => {
-        console.log(cliente, productos);
+    const guardarCompra = (buyer) => {
+        const order = {
+            buyer,
+            item: cart,
+            total:totalGeneral()
+        }
+        console.log(order);
     }
 
     //console.log(cart);
@@ -62,6 +73,7 @@ const CartContextProvider = ({ children }) => {
         deleteCart,
         setCart,
         totalCant,
+        totalGeneral,
         guardarCompra
     }}> {children} </CartContext.Provider>
 }
