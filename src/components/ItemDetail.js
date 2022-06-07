@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import ItemCount from "./ItemCount"
 
+//LO USO PARA CREAR CARD DE CADA PRODUCTS Idivudual
 const ItemDetail = (props) => {
 
     const { id, name, categoria, precio, stock, img } = props.item
@@ -16,7 +17,7 @@ const ItemDetail = (props) => {
         <>
 
             <div className="card w-11/12 md:w-3/5 container mx-auto bg-base-100 shadow-xl ring-offset-2 ring-2 m-4">
-                <figure><img src={img} alt="Shoes" /></figure>
+                <figure ><img src={img} alt={name} /></figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title justify-center">{name}</h2>
                     <p>{categoria}</p>
@@ -24,8 +25,10 @@ const ItemDetail = (props) => {
                     <h2 className="text-xl">${precio}</h2>
 
                     <div className="card-actions justify-center">
-                        {terminar ? (
-                            <Link to={'/cart'} className="btn btn-outline btn-accent">Finalizar Compra</Link>
+                        {terminar ? (<div>
+                            <Link to={'/'} className="btn btn-outline btn-success m-2">Seguir Comprando</Link>
+                            <Link to={'/cart'} className="btn btn-outline btn-info m-2">Finalizar Compra</Link>
+                            </div>
                         ) : (
                             <div><ItemCount stock={stock} onAdd={onAdd} id={id} /></div>
                         )}

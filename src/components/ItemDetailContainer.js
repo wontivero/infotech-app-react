@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getItem } from "../data/itemData"
 import { useAppContext } from "./context/AppContext"
 import ItemDetail from "./ItemDetail"
 
-
+//USAMOS PARA DETALLES  INDIVIDUAL DE CADA PRODUCTO 
 
 const ItemDetailContainer = () => {
     //Recuperamo el ID q nos manda por URL
@@ -19,10 +18,9 @@ const ItemDetailContainer = () => {
 
     
     return (
-        <div>
+        <div className="m-20">
             <h2 className="font-bold text-xl text-left m-5">Detalle del Producto:</h2>
-            {item.map(articulo => <ItemDetail key={articulo.id} item={articulo} />)}
-            
+            {item.map(articulo => <ItemDetail key={articulo.id} item={articulo} />)}           
             
         </div>
     )

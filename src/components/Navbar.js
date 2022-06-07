@@ -4,7 +4,7 @@ import CartWidget from "./CartWidget"
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-blue-300">
+        <div className="navbar bg-blue-300 sticky top-0 z-50">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label className="btn btn-ghost lg:hidden">

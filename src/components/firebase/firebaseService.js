@@ -50,7 +50,7 @@ export const generateOrder = async (order) => {
 		...order,
 		date: Timestamp.fromDate(new Date()),
 	})
-	console.log(newOrder.id);
+	//console.log(newOrder.id);
 	return newOrder
 }
 
