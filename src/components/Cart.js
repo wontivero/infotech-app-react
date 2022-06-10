@@ -9,78 +9,83 @@ const Cart = () => {
     const { cart, deleteFromCart, deleteCart } = useCartContext()
     const buyer = { nombre: "Jose", phone: "351123858", email: "jose@gmail.com" }
 
-    const handlerSave = ()=>{
+    const handlerSave = () => {
 
         let total = 0
         cart.forEach(item => total += item.quantity * item.precio)
         console.log(total);
-        
+
         const order = {
             buyer,
             item: cart,
-            total: total    
+            total: total
         }
 
-        generateOrder(order).then((result)=>{
+        generateOrder(order).then((result) => {
             new Swal({
                 title: "Tu orden fue enviada con éxito!",
                 text: `Tu n° de orden es: ${result.id}`,
                 icon: "success",
                 button: "Ok",
             })
-            .then(() => deleteCart())
+                .then(() => deleteCart())
         })
-
-
     }
-    
 
 
-    const cartPrint = cart.map((item) => {
+
+    const cartPrint = () => {
+
         function deleteItem(item) {
             deleteFromCart(item);
         }
 
 
-        const totalPrice = item.quantity * item.precio;
+
 
 
         return (
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div className="overflow-x-auto p-5">
+                <table className="table w-full ">
                     <thead>
                         <tr>
-                            <th></th>
+
                             <th>Producto</th>
                             <th>Cantidad</th>
+                            <th>Precio</th>
                             <th>Total</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody className="text-left">
-                        <tr key={cart.id}>
-                            <th>•</th>
-                            <td className="">
-                                <Link className="btn btn-link w-36" to={`/item/${item.id}`}>
-                                    <span>
-                                        {item.name}
-                                    </span>
-                                </Link>
-                            </td>
-                            <td>{item.quantity}</td>
-                            <td>${totalPrice}</td>
+                        {cart.map(item => (
 
-                            <td><Link to={'/cart'}>
-                                <button className="btn btn-outline btn-accent"
-                                    onClick={() => deleteItem(item)}>
-                                    Eliminar
-                                </button>
-                            </Link></td>
-                        </tr>
+                            <tr key={item.id} className="border-gray-200 hover">
+                                <Link to={`/item/${item.id}`}><th className="flex flex-row justify-left items-center pr-4 md:pr-0">
+                                    <img className="p-4 h-36" src={item.img} alt={item.name} />
+                                    <div className="flex flex-col text-justify">
+                                        <p className="">{item.name}</p>
+                                    </div>
+                                </th>
+                                </Link>
+
+                                <th className="">{item.quantity}</th>
+                                <th className="">$ {item.precio}</th>
+                                <th className="">$ {item.precio * item.quantity}</th>
+                                <th className="px-4 lg:pl-2 xl:pl-24">
+                                    <Link to={'/cart'}>
+                                        <button className="btn btn-outline btn-accent"
+                                            onClick={() => deleteItem(item)}>
+                                            Eliminar
+                                        </button>
+                                    </Link>
+                                </th>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>)
-    });
+    };
 
 
     if (cart.length === 0) {
@@ -88,7 +93,7 @@ const Cart = () => {
             <div className="text-center">
                 <h3 className="mt-32">No has agregado productos</h3>
                 <Link className="m-4" to="/">
-                    <button data-theme="emerald" class="btn btn-wide">Volver al Inicio</button>
+                    <button data-theme="emerald" className="btn btn-wide">Volver al Inicio</button>
                 </Link>
             </div>
         );
@@ -97,29 +102,20 @@ const Cart = () => {
         return (
             <div data-theme="emerald">
                 <div>
-                    <ul>{cartPrint}</ul>
+                    <ul>{cartPrint()}</ul>
                 </div>
-                <div className="">
-                    <button
-                        onClick={handlerSave}
-                        className="
-             mb-2 w-full inline-block px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-normal
-             uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg
-             focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out
-             "
-                    >
-                        Comprar
-                    </button>
-
+                <div className="flex justify-center m-5">
                     <button
                         onClick={deleteCart}
-                        className="
-             mb-2 w-full inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-normal
-             uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg
-             focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out
-             "
+                        className="btn btn-outline btn-error m-4"
                     >
-                        Borrar Todo
+                        Eliminar Todo
+                    </button>
+                    <button
+                        onClick={handlerSave}
+                        className="btn btn-outline btn-success  m-4"
+                    >
+                        Comprar
                     </button>
                 </div>
             </div >
