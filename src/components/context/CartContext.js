@@ -62,7 +62,7 @@ const CartContextProvider = ({ children }) => {
             item: cart,
             total:totalGeneral()
         }
-        console.log(order);
+        //console.log(order);
     }
 
     //console.log(cart);

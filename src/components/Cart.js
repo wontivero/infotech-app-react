@@ -3,22 +3,25 @@ import { Link } from "react-router-dom";
 import { useCartContext } from "./context/CartContext";
 import { generateOrder } from "./firebase/firebaseService";
 import Swal from "sweetalert2"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useForm } from 'react-hook-form'
 
 //import DeleteButton from "./DeleteButton";
 const Cart = () => {
     const { cart, deleteFromCart, deleteCart } = useCartContext()
-    const buyer = { nombre: "Jose", phone: "351123858", email: "jose@gmail.com" }
+    const buyer = { name: "", lastName: "", phone: "", email: "" }
+
 
     const handlerSave = () => {
-
-        let total = 0
-        cart.forEach(item => total += item.quantity * item.precio)
-        console.log(total);
+        // let total = 0
+        // cart.forEach(item => total += item.quantity * item.precio)
+        // console.log(total);
 
         const order = {
             buyer,
             item: cart,
-            total: total
+            total: totalCompra()
         }
 
         generateOrder(order).then((result) => {
@@ -32,6 +35,11 @@ const Cart = () => {
         })
     }
 
+    const totalCompra = () => {
+        let total = 0
+        cart.forEach(item => total += item.quantity * item.precio)
+        return total
+    }
 
 
     const cartPrint = () => {
@@ -39,53 +47,102 @@ const Cart = () => {
         function deleteItem(item) {
             deleteFromCart(item);
         }
-
-
-
-
-
         return (
-            <div className="overflow-x-auto p-5">
-                <table className="table w-full ">
-                    <thead>
+            <div className="overflow-x-auto p-3">
+                <span className="font-semibold">DETALLES DE TU COMPRA:</span>
+                <table className="table-auto  w-full mt-2">
+                    <thead className="border border-slate-600 bg-slate-300">
                         <tr>
-
                             <th>Producto</th>
                             <th>Cantidad</th>
                             <th>Precio</th>
                             <th>Total</th>
-                            <th></th>
+                            <th><button
+                                onClick={deleteCart}
+                                className="btn btn-outline btn-error btn-sm tooltip tooltip-error" data-tip="Vaciar Carrito"
+                            ><FontAwesomeIcon icon={faTrash} className=" h-4" />
+                                {/* Carrito */}
+                            </button></th>
                         </tr>
                     </thead>
-                    <tbody className="text-left">
+                    <tbody className="text-center w-full">
                         {cart.map(item => (
 
-                            <tr key={item.id} className="border-gray-200 hover">
-                                <Link to={`/item/${item.id}`}><th className="flex flex-row justify-left items-center pr-4 md:pr-0">
-                                    <img className="p-4 h-36" src={item.img} alt={item.name} />
-                                    <div className="flex flex-col text-justify">
-                                        <p className="">{item.name}</p>
-                                    </div>
-                                </th>
-                                </Link>
+                            <tr key={item.id} className="hover border border-slate-400">
 
-                                <th className="">{item.quantity}</th>
-                                <th className="">$ {item.precio}</th>
-                                <th className="">$ {item.precio * item.quantity}</th>
-                                <th className="px-4 lg:pl-2 xl:pl-24">
+                                <td className="text-left pl-3">
+                                    <Link to={`/item/${item.id}`}>
+                                        <div className="inline-block text-left ">
+                                            <img className="h-24 hidden  sm:block" src={item.img} alt={item.name} />
+                                            <div className=" ">
+                                                <p className=" font-semibold">{item.name}</p>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </td>
+
+                                {/* <th className="">{item.name}</th> */}
+                                <td className="">{item.quantity}</td>
+                                <td className="">$ {item.precio}</td>
+                                <td className="">$ {item.precio * item.quantity}</td>
+                                <td className="px-4 ">
                                     <Link to={'/cart'}>
-                                        <button className="btn btn-outline btn-accent"
+                                        <button className="btn btn-outline btn-accent btn-sm tooltip tooltip-error" data-tip="Quitar producto"
                                             onClick={() => deleteItem(item)}>
-                                            Eliminar
+                                            <FontAwesomeIcon icon={faTrash} className=" " />
+                                            {/* Eliminar */}
                                         </button>
                                     </Link>
-                                </th>
-                            </tr>
-                        ))}
+                                </td>
+                            </tr>))}
                     </tbody>
+
                 </table>
+                <div className="float-right text-lg font-semibold mx-2">
+                    Total Compra: $ {totalCompra()}
+                </div>
             </div>)
+
     };
+
+    const FormCart = () => {
+        const { register, formState: { errors }, handleSubmit } = useForm();
+
+        const onSubmit = (data) => {
+
+            buyer.name = data.firstName
+            buyer.lastName = data.lastName
+            buyer.phone = data.phone
+            buyer.email = data.email
+            //console.log(buyer);
+            handlerSave()
+
+        }
+        return (
+            <div className="p-3 mr-2 flex justify-center ">
+                <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+
+                    <span className="m-2 font-semibold">DATOS DE FACTURACIÓN:</span>
+
+                    <input {...register("firstName", { required: true, maxLength: 20 })} type="text" placeholder="Nombre" className="input input-bordered input-primary w-full m-2" />
+                    <span className='block text-red-600  mx-3'>{errors.firstName && "Su Nombre es requerido"}</span>
+
+                    <input {...register("lastName", { required: true, maxLength: 20 })} type="text" placeholder="Apellido" className="input input-bordered input-primary w-full m-2" />
+                    <span className='block text-red-600 mx-3'>{errors.lastName && "Su Apellido es requerido"}</span>
+
+                    <input {...register("phone", { required: true, maxLength: 20 })} type="text" placeholder="Telefono" className="input input-bordered input-primary w-full m-2" />
+                    <span className='block text-red-600 mx-3'>{errors.phone && "Su Telefono es requerido"}</span>
+
+                    <input {...register("email", { required: true, maxLength: 20 })} type="email" placeholder="email" className="input input-bordered input-primary w-full m-2" />
+                    <span className='block text-red-600  mx-3'>{errors.email && "Su Email es requerido"}</span>
+
+                    <button type="submit" className="btn btn-success mt-2 float-right">
+                        Finalizar Compra
+                    </button>
+                </form>
+            </div>
+        );
+    }
 
 
     if (cart.length === 0) {
@@ -100,25 +157,16 @@ const Cart = () => {
     }
     if (cart.length !== 0) {
         return (
-            <div data-theme="emerald">
-                <div>
-                    <ul>{cartPrint()}</ul>
+            <div data-theme="emerald" className="grid grid-cols-12 gap-1">
+                <div className="col-span-12 lg:col-span-8">
+                    {cartPrint()}
                 </div>
-                <div className="flex justify-center m-5">
-                    <button
-                        onClick={deleteCart}
-                        className="btn btn-outline btn-error m-4"
-                    >
-                        Eliminar Todo
-                    </button>
-                    <button
-                        onClick={handlerSave}
-                        className="btn btn-outline btn-success  m-4"
-                    >
-                        Comprar
-                    </button>
+
+                <div className="col-span-12 lg:col-span-4">
+                    {FormCart()}
                 </div>
             </div >
+
         )
     }
 }

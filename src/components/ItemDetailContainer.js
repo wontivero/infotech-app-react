@@ -18,10 +18,12 @@ const ItemDetailContainer = () => {
 
     
     return (
-        <div className="m-20">
-            <h2 className="font-bold text-xl text-left m-5">Detalle del Producto:</h2>
-            {item.map(articulo => <ItemDetail key={articulo.id} item={articulo} />)}           
+        <div className="container m-auto r">
+            <div className=" m-2 ">
+            <h2 className="font-bold text-xl text-left mt-3">Detalle del Producto:</h2>
+            {item.map(articulo => <ItemDetail key={articulo.id} item={articulo} />)}       
             
+            </div>
         </div>
     )
 }

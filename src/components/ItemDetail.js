@@ -10,13 +10,13 @@ const ItemDetail = (props) => {
 
     const onAdd = (count) => {
         setTerminar(true)
-        console.log(count)
+        //console.log(count)
     }
 
     return (
         <>
 
-            <div className="card w-11/12 md:w-3/5 container mx-auto bg-base-100 shadow-xl ring-offset-2 ring-2 m-4">
+            <div className="card card-compact w-96 shadow-xl ">
                 <figure ><img src={img} alt={name} /></figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title justify-center">{name}</h2>

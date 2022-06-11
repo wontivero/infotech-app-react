@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-
+//Item Detalle para Grilla
 const ItemCard = (props) => {
 
     const { id, name, categoria, precio, img } = props.item
