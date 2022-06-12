@@ -16,7 +16,7 @@ const ItemDetail = (props) => {
     return (
         <>
 
-            <div className="card card-compact w-80 shadow-xl ">
+            <div className="card card-compact sm:w-96 shadow-xl w-full ">
                 <figure ><img src={img} alt={name} /></figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title justify-center">{name}</h2>

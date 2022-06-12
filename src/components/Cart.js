@@ -87,7 +87,7 @@ const Cart = () => {
                                 <td className="">$ {item.precio * item.quantity}</td>
                                 <td className="px-4 ">
                                     <Link to={'/cart'}>
-                                        <button className="btn btn-outline btn-accent btn-sm tooltip tooltip-error" data-tip="Quitar producto"
+                                        <button className="btn btn-outline btn-error  btn-sm tooltip tooltip-error" data-tip="Quitar producto"
                                             onClick={() => deleteItem(item)}>
                                             <FontAwesomeIcon icon={faTrash} className=" " />
                                             {/* Eliminar */}
@@ -162,7 +162,7 @@ const Cart = () => {
     }
     if (cart.length !== 0) {
         return (
-            <div data-theme="emerald" className="grid grid-cols-12 gap-1">
+            <div className="grid grid-cols-12 gap-1">
                 <div className="col-span-12 lg:col-span-8">
                     {cartPrint()}
                 </div>
