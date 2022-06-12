@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useCartContext } from "./context/CartContext";
 import { generateOrder } from "./firebase/firebaseService";
 import Swal from "sweetalert2"
@@ -26,12 +26,13 @@ const Cart = () => {
 
         generateOrder(order).then((result) => {
             new Swal({
-                title: "Tu orden fue enviada con éxito!",
+                title: `${buyer.name}, tu orden fue enviada con éxito!`,
                 text: `Tu n° de orden es: ${result.id}`,
                 icon: "success",
                 button: "Ok",
             })
                 .then(() => deleteCart())
+                .then(()=> window.location.href ='/') //al finalizar y aceptar el cartel lo redirecciona a home
         })
     }
 
@@ -89,7 +90,7 @@ const Cart = () => {
                                     <Link to={'/cart'}>
                                         <button className="btn btn-outline btn-error  btn-sm tooltip tooltip-error" data-tip="Quitar producto"
                                             onClick={() => deleteItem(item)}>
-                                            <FontAwesomeIcon icon={faTrash} className=" " />
+                                            <FontAwesomeIcon icon={faTrash}/>
                                             {/* Eliminar */}
                                         </button>
                                     </Link>
@@ -116,7 +117,7 @@ const Cart = () => {
             buyer.email = data.email
             //console.log(buyer);
             handlerSave()
-
+            
         }
         return (
             <div className="p-3 mr-2 flex justify-center ">
