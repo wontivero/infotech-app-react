@@ -12,7 +12,7 @@
 
 * **Alumno:** Walter Ontivero
 
-* **Proyecto final:** hhttps://infotech-app-react.vercel.app/
+* **Proyecto final:** https://infotech-app-react.vercel.app/
 
 
 ## Fundamentación
