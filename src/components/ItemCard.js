@@ -7,7 +7,7 @@ const ItemCard = (props) => {
     return (
         <div >
             <div className="card  bg-base-100 shadow-xl ring-offset-2 ring-2 m-4 ">
-            <figure className="max-w-fit h-96 p-6"><img src={img} alt="infotech Product" /></figure>
+            <figure className="max-w-fit h-80 p-6"><img src={img} alt="infotech Product" /></figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title justify-center">{name}</h2>
                     <p>{categoria}</p>

@@ -147,10 +147,15 @@ const Cart = () => {
 
     if (cart.length === 0) {
         return (
-            <div className="text-center">
-                <h3 className="mt-32">No has agregado productos</h3>
+            <div className="text-center ">
+                <h3 className="m-3 text-lg font-semibold">Tu carro esta vacio.</h3>
+                <div className="flex items-center justify-center">
+                    <img className="h-48 text-center" src="https://firebasestorage.googleapis.com/v0/b/infotechreact.appspot.com/o/emptyCart.gif?alt=media&token=010333cc-3056-43cd-9c74-fbbd490301c7" alt="Carro sin Productos" />
+                </div>
+
+
                 <Link className="m-4" to="/">
-                    <button data-theme="emerald" className="btn btn-wide">Volver al Inicio</button>
+                    <button  className="btn btn-wide btn-success btn-outline">Volver al Inicio</button>
                 </Link>
             </div>
         );
